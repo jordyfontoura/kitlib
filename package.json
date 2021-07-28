@@ -1,0 +1,40 @@
+{
+  "name": "kitlib",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lib/index.js",
+  "types": "lib",
+  "scripts": {
+    "build": "tsc -p .",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Jordy Fontoura",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jordyfontoura/kitlib.git"
+  },
+  "bugs": {
+    "email": "jordyfontora@hotmail.com",
+    "url": "https://github.com/jordyfontoura/kitlib/issues"
+  },
+  "homepage": "https://github.com/jordyfontoura/kitlib#readme",
+  "devDependencies": {
+    "@babel/core": "^7.14.8",
+    "@babel/preset-env": "^7.14.8",
+    "@babel/preset-typescript": "^7.14.5",
+    "@types/jest": "^26.0.24",
+    "@types/object-hash": "^2.1.1",
+    "@types/seed-random": "^2.2.1",
+    "babel-jest": "^27.0.6",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.4",
+    "ts-node": "^10.1.0",
+    "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "object-hash": "^2.2.0",
+    "seed-random": "^2.2.0"
+  }
+}

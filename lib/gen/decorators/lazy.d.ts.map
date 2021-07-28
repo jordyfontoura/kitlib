@@ -1,0 +1,1 @@
+{"version":3,"file":"lazy.d.ts","sourceRoot":"","sources":["../../../src/gen/decorators/lazy.ts"],"names":[],"mappings":"AAAA,wBAAgB,IAAI,CAClB,SAAS,EAAE,MAAM,GAAG,GACnB,CAAC,MAAM,EAAE,GAAG,EAAE,WAAW,EAAE,MAAM,EAAE,UAAU,EAAE,kBAAkB,KAAK,GAAG,CAAC;AAC7E,wBAAgB,IAAI,CAAC,CAAC,GAAC,GAAG,EACxB,MAAM,EAAE,CAAC,EACT,WAAW,EAAE,MAAM,EACnB,UAAU,EAAE,kBAAkB,GAC7B,GAAG,CAAC"}
