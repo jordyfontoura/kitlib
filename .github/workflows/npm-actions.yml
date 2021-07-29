@@ -15,14 +15,14 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v2
+      - name: Bump version
+        run: npm version patch
       # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v1
         with:
           node-version: "14.x"
           registry-url: "https://registry.npmjs.org"
       - run: npm install
-      - name: Bump version
-        run: npm version patch
       # Publish to npm
       - run: npm publish --access public
         env:
