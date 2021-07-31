@@ -35,6 +35,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
+    "gpu.js": "^2.11.3",
     "object-hash": "^2.2.0",
     "seed-random": "^2.2.0"
   }
