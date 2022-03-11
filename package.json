@@ -6,7 +6,11 @@
   "types": "lib",
   "scripts": {
     "build": "tsc -p .",
-    "test": "jest"
+    "build:watch": "tsc -w -p .",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:auto": "jest --clearCache --clearMocks && jest",
+    "test:clear": "jest --clearCache --clearMocks"
   },
   "keywords": [],
   "author": "Jordy Fontoura",
@@ -29,12 +33,13 @@
     "@types/seed-random": "^2.2.1",
     "babel-jest": "^27.0.6",
     "fs": "^0.0.1-security",
-    "jest": "^27.0.6",
+    "jest": "^27.4.3",
     "ts-jest": "^27.0.4",
     "ts-node": "^10.1.0",
     "typescript": "^4.3.5"
   },
   "dependencies": {
+    "colors": "^1.4.0",
     "gpu.js": "^2.11.3",
     "object-hash": "^2.2.0",
     "seed-random": "^2.2.0"

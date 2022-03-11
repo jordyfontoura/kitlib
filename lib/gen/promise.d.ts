@@ -3,8 +3,8 @@
  * @param {{timeout: number, step: number}} options
  * @returns {Promise}
  */
-export declare function promiseWhen(condition: () => boolean, options?: {
+export declare function waitWhile(condition: () => boolean, options?: {
     timeout?: number;
     step?: number;
-}): Promise<unknown>;
+}): Promise<void>;
 //# sourceMappingURL=promise.d.ts.map

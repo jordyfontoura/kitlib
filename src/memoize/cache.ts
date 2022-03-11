@@ -1,11 +1,11 @@
-import { promises, PathLike } from "fs";
+import { promises, PathLike } from 'fs';
 
 async function fileExists(filename: PathLike) {
   try {
     await promises.stat(filename);
     return true;
   } catch (err) {
-    if ((err as any).code === "ENOENT") {
+    if ((err as any).code === 'ENOENT') {
       return false;
     } else {
       throw err;
@@ -20,7 +20,7 @@ async function save(path: PathLike, data: Uint8Array | string) {
 }
 type Options<T, K> =
   | {
-      mode: "file";
+      mode: 'file';
       stringify?: (pkg: K) => string | Uint8Array;
       parse?: (buffer: Buffer) => K;
       /**
@@ -43,7 +43,7 @@ type Options<T, K> =
       save?: (pkg: K) => boolean;
     }
   | {
-      mode: "memory";
+      mode: 'memory';
       /**
        * Empacota a informação para ser armazenada
        * @param data Informação a ser armazenada
@@ -76,7 +76,7 @@ export async function cache<T, K = T>(
   generator: () => T,
   opts:
     | {
-        mode?: "file";
+        mode?: 'file';
         stringify?: (pkg: K) => string | Uint8Array;
         parse?: (buffer: Buffer) => K;
         /**
@@ -99,7 +99,7 @@ export async function cache<T, K = T>(
         save?: (pkg: K) => boolean;
       }
     | {
-        mode: "memory";
+        mode: 'memory';
         /**
          * Empacota a informação para ser armazenada
          * @param data Informação a ser armazenada

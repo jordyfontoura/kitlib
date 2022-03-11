@@ -5,5 +5,5 @@
  * @param max valor máximo
  * @returns retorna um valor entre min e max se o valor estiver entre min e max, caso contrario retorna min ou max
  */
-export declare function clamp(valor: number, min: number, max: number): number;
+export default function clamp(valor: number, min: number, max: number): number;
 //# sourceMappingURL=clamp.d.ts.map

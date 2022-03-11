@@ -1,1 +1,1 @@
-{"version":3,"file":"clock.d.ts","sourceRoot":"","sources":["../../src/timers/clock.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,OAAO,OAAO,KAAK;IACxB,OAAO,CAAC,SAAS,CAAS;;IAI1B,KAAK;IAGL,IAAI,OAAO,WAEV;CACF"}
+{"version":3,"file":"clock.d.ts","sourceRoot":"","sources":["../../src/timers/clock.ts"],"names":[],"mappings":"AAEA,MAAM,CAAC,OAAO,OAAO,KAAK;IACxB,OAAO,CAAC,SAAS,CAAS;;IAI1B,KAAK;IAGL,IAAI,OAAO,WAEV;CACF"}
