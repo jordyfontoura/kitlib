@@ -16,6 +16,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Install python and others
+        run: apt-get -y install node-gyp build-essential libssl-dev libffi-dev libblas3 libc6 liblapack3 gcc python3-dev
+      - name: Install os dependecies
+        run: apt-get update -y && apt-get install xserver-xorg-dev libxi-dev libxext-dev -y
       - name: Install dependencies
         run: npm install
       - run: npm test
