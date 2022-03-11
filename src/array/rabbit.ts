@@ -1,3 +1,5 @@
+import { autoThis } from '../overload';
+
 /**
  * Insere elementos em uma lista saltando um número determinado de itens
  * @param lista Lista onde ocorrerá a inserção
@@ -6,7 +8,7 @@
  * @param salto Quantidade de itens a serem saltados a cada inserção. (OBS: salto deve ser maior que 0)
  * @param quantidade Quantidade máxima de itens a serem inseridos. (Default: infinito)
  */
- export function rabbitInsertion<T = any>(
+export function rabbitInsertion<T = any>(
   lista: T[],
   fn: (count: number) => T,
   compensar: number = 0,
@@ -23,7 +25,7 @@
 
 declare global {
   interface Array<T> {
-    rabbitInsertion<K>(
+    rabbitInsert<K>(
       fn: (count: number) => K,
       compensar?: number,
       salto?: number,
@@ -31,11 +33,8 @@ declare global {
     ): void;
   }
 }
-Array.prototype.rabbitInsertion = function<T=any>(
-  fn: (count: number) => T,
-  compensar: number = 0,
-  salto: number = 2,
-  quantidade: number = Infinity
-): void{
-  rabbitInsertion(this, fn, compensar, salto, quantidade);
+export function overload() {
+  Array.prototype.rabbitInsert = function <T = any>(): void {
+    return autoThis(rabbitInsertion);
+  };
 }
