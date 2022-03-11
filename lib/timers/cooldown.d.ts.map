@@ -1,1 +1,0 @@
-{"version":3,"file":"cooldown.d.ts","sourceRoot":"","sources":["../../src/timers/cooldown.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,MAAM,SAAS,CAAC;AAE5B,MAAM,CAAC,OAAO,OAAO,QAAS,SAAQ,KAAK;IACzC,IAAI,EAAE,MAAM,CAAC;gBACD,IAAI,EAAE,MAAM;IAIxB,IAAI,KAAK,IAAI,OAAO,CAEnB;IACD,KAAK,aAAc;IACnB,MAAM;CAOP"}
