@@ -1,6 +1,6 @@
 {
   "name": "@kitlib/helpers",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Kitlib - Helpers",
   "author": "Jordy Fontoura <jordyfontoura@outlook.com>",
   "license": "MIT",
@@ -14,5 +14,5 @@
   },
   "scripts": {},
   "peerDependenciesMeta": {},
-  "gitHead": "524a8ca33b450a3a5c2e5eb6e659525a02d9a461"
+  "gitHead": "84c3e79273dc74b2cce30dba89acfffa9984192b"
 }
