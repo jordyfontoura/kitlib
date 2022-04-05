@@ -1,6 +1,7 @@
 # source
 **/*.ts
 *.ts
+*.log
 
 # definitions
 !**/*.d.ts
