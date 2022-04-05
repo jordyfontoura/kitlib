@@ -17,6 +17,7 @@
     "lib": ["es7"],
     "paths": {
       "@kitlib/helpers": ["./packages/helpers"],
+      "@kitlib/helpers/*": ["./packages/helpers/*"],
     }
   },
   "include": ["packages/**/*"],

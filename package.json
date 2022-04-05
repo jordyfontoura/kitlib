@@ -2,6 +2,11 @@
   "name": "kitlib",
   "private": true,
   "scripts": {
+    "build": "gulp build --dist node_modules/@kitlib",
+    "post:build": "gulp move",
+    "pre:release": "gulp copy-misc && gulp build --dist node_modules/@kitlib",
+    "build:prd": "gulp build",
+    "publish": "npm run pre:release && npm run build:prd && ./node_modules/.bin/lerna publish --force-publish --exact -m \"chore(@kitlib) publish %s release\"",
     "test": "jest"
   },
   "devDependencies": {
@@ -11,6 +16,12 @@
     "@types/jest": "^27.4.1",
     "@types/node": "^17.0.23",
     "babel-jest": "^27.5.1",
+    "cli-color": "^2.0.2",
+    "delete-empty": "^3.0.0",
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
     "jest": "^27.5.1",
     "lerna": "^4.0.0",
     "ts-jest": "^27.1.4",
