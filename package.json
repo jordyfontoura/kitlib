@@ -7,7 +7,7 @@
     "pre:release": "gulp copy-misc && gulp build --dist node_modules/@kitlib",
     "build:prd": "gulp build",
     "build:samples": "gulp install:samples && npm run build && gulp build:samples",
-    "publish": "npm run pre:release && npm run build:prd && ./node_modules/.bin/lerna publish --force-publish --exact -m \"chore(@kitlib) publish %s release\"",
+    "publish": "npm run pre:release && npm run build:prd && ./node_modules/.bin/lerna publish --canary --yes --exact -m \"chore(@kitlib) publish %s release\"",
     "test": "jest",
     "test:samples": "gulp test:samples && gulp test:e2e:samples"
   },
