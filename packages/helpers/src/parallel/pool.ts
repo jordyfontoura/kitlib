@@ -37,9 +37,9 @@ export interface IParallelTaskReport {
  * @returns Pool object
  * @example
  * async function isPrime(n: number) {
- *   if (n < 2) return false;
+ *   if (n < 2) return;
  *   for (let i = 2; i <= Math.sqrt(n); i++) {
- *     if (n % i === 0) return false;
+ *     if (n % i === 0) return;
  *   }
  *   
  *   console.log(`${n} is prime`);
