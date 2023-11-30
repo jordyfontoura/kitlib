@@ -1,0 +1,32 @@
+{
+  "name": "@kitlib/helpers",
+  "version": "0.1.12",
+  "description": "Kitlib - Helpers",
+  "author": "Jordy Fontoura <jordyfontoura@outlook.com>",
+  "license": "MIT",
+  "homepage": "https://kitlib.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kitlib/helpers"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "test": "jest"
+  },
+  "peerDependenciesMeta": {},
+  "gitHead": "8bc46a637473245ddd50f0b775bc0cbc4b55a96d",
+  "devDependencies": {
+    "@babel/core": "^7.21.8",
+    "@babel/plugin-proposal-decorators": "^7.21.0",
+    "@babel/preset-env": "^7.21.5",
+    "@babel/preset-typescript": "^7.21.5",
+    "@types/jest": "^29.5.1",
+    "@types/node": "^20.2.3",
+    "babel-jest": "^29.5.0",
+    "jest": "^29.5.0",
+    "rimraf": "^5.0.1"
+  }
+}
