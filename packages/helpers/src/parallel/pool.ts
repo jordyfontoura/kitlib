@@ -36,15 +36,18 @@ export interface IParallelTaskReport {
  * @param options Pool options
  * @returns Pool object
  * @example
- * const pool = useParallelPool(async () => {
- *   return await new Promise((resolve) => setTimeout(()=>{
- *     console.log("Task done");
- *     resolve();
- *   }, 1000));
- *  }, { concurrency: 5, maxRetries: 3 });
+ * async function isPrime(n: number) {
+ *   if (n < 2) return false;
+ *   for (let i = 2; i <= Math.sqrt(n); i++) {
+ *     if (n % i === 0) return false;
+ *   }
+ *   
+ *   console.log(`${n} is prime`);
+ * }
+ * const pool = useParallelPool(isPrime, { concurrency: 5, maxRetries: 3 });
  * 
- * for (let i = 0; i < 6; i++) {
- *   await pool.enqueue();
+ * for (let i = 1_000_000_000; i < 1_000_001_000; i++) {
+ *   await pool.enqueue(i);
  * }
  * 
  * await pool.drain();
