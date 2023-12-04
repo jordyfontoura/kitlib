@@ -15,6 +15,10 @@ export interface IParallelPoolOptions {
 
 export interface IParallelTaskReport {
   /**
+   * Name of the function that threw the error
+   */
+  function: string;
+  /**
    * Arguments passed to the task
    */
   arguments: any[];
@@ -67,11 +71,14 @@ export function useParallelPool<TFn extends (...args: any) => Promise<any>>(
    */
   const reports: IParallelTaskReport[] = [];
 
-  return {
+  const self = {
+    create: useParallelPool,
     enqueue,
     drain,
     reports,
   };
+
+  return self;
 
   async function queue(...args: Parameters<TFn>) {
     let attempt = 0;
@@ -85,8 +92,17 @@ export function useParallelPool<TFn extends (...args: any) => Promise<any>>(
       let at = 0;
       while (attempt < maxRetries) {
         try {
-          await parallelFunction(...(args as any));
+          const result = await parallelFunction(...(args as any));
           pool.delete(promise);
+
+          if (result && "reports" in result && Array.isArray(result.reports) && result.reports.length > 0) {
+            reports.push({
+              function: parallelFunction.name,
+              arguments: args,
+              error: result.reports,
+              at: Date.now(),
+            });
+          }
           return;
         } catch (e) {
           error = e;
@@ -100,6 +116,7 @@ export function useParallelPool<TFn extends (...args: any) => Promise<any>>(
       }
 
       reports.push({
+        function: parallelFunction.name,
         arguments: args,
         error,
         at,
@@ -126,5 +143,7 @@ export function useParallelPool<TFn extends (...args: any) => Promise<any>>(
    */
   async function drain() {
     await Promise.all(pool);
+
+    return self;
   }
 }
