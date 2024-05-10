@@ -1,7 +1,8 @@
 export type ScoreCondition = boolean | ScoreCondition[];
 
 /**
- * Calcula o score de um conjunto de condições
+ * Calcula o score de um conjunto de condições usando uma ordem de prioridade da primeira condição para a última.
+ * A primeira condição tem peso 2^(n-1), a segunda 2^(n-2) e assim por diante, onde n é o número de condições.
  * @param conditions Condições a serem avaliadas
  * @return O score calculado
  * @example
@@ -15,10 +16,10 @@ export type ScoreCondition = boolean | ScoreCondition[];
  * console.log(calculateScore([true, true])) // 3
  * console.log(calculateScore([false, true])) // 1
  * console.log(calculateScore([[true, true], true])) // 3
- * console.log(calculateScore([[true, false], true])) // 2.5
+ * console.log(calculateScore([[true, false], true])) // 2
  * console.log(calculateScore([[false, true], true])) // 2
  * console.log(calculateScore([[false, false], true])) // 1
- * console.log(calculateScore([[true, false], [true, [false, true]], true, true, true])) // 26
+ * console.log(calculateScore([[true, false], [true, false, false, true], true, true, true])) // 19
  */
 export function calculateScore(conditions: ScoreCondition[]): number {
   let score = 0;
@@ -30,14 +31,12 @@ export function calculateScore(conditions: ScoreCondition[]): number {
       }
     } else {
       const contitionsGroup = conditions[i] as ScoreCondition[];
-      let delta = calculateScore(contitionsGroup); 
+      let delta = calculateGroupScore(contitionsGroup); 
 
       if (delta === 0) {
         continue;
       }
 
-      delta++;
-      delta /= (1 << (contitionsGroup.length));
       delta *= 1 << (conditions.length - i - 1);
 
       score += delta;
@@ -47,12 +46,25 @@ export function calculateScore(conditions: ScoreCondition[]): number {
   return score;
 }
 
+function calculateGroupScore(conditions: ScoreCondition[]): number {
+  let score = 0;
 
+  for (let i = 0; i < conditions.length; i++) {
+    if (typeof conditions[i] === 'boolean') {
+      if (conditions[i]) {
+        score += 1 / conditions.length;
+      }
+    } else {
+      const contitionsGroup = conditions[i] as ScoreCondition[];
+      let delta = calculateGroupScore(contitionsGroup); 
 
-console.log(calculateScore([true, true])) // 3
-console.log(calculateScore([false, true])) // 1
-console.log(calculateScore([[true, true], true])) // 3
-console.log(calculateScore([[true, false], true])) // 2.5
-console.log(calculateScore([[false, true], true])) // 2
-console.log(calculateScore([[false, false], true])) // 1
-console.log(calculateScore([[true, false], [true, [false, true]], true, true, true])) // 26
+      if (delta === 0) {
+        continue;
+      }
+
+      score += delta / conditions.length;
+    }
+  }
+
+  return score;
+}

@@ -5,14 +5,13 @@ describe('score', () => {
     expect(calculateScore([true, true])).toBe(3)
     expect(calculateScore([false, true])).toBe(1)
     expect(calculateScore([[true, true], true])).toBe(3)
-    expect(calculateScore([[true, false], true])).toBe(2.5)
+    expect(calculateScore([[true, false], true])).toBe(2)
     expect(calculateScore([[false, true], true])).toBe(2)
     expect(calculateScore([[false, false], true])).toBe(1)
-    expect(calculateScore([[true, false], [true, [false, true]], true, true, true])).toBe(26)
+    expect(calculateScore([[true, false], [true, false, false, true], true, true, true])).toBe(19)
   });
 
   it('should calculate the score of a all set of conditions', () => {
-
     for (let a = 0; a < 2; a++) {
       for (let b = 0; b < 2; b++) {
         for (let c = 0; c < 2; c++) {
