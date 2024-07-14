@@ -122,8 +122,8 @@ declare global {
 }
 
 Promise.prototype.asResult = function asResult<
+  U = unknown,
   E = Error,
-  U = unknown
 >(): Promise<IResult<U, E>> {
   return this.then(success, error) as Promise<IResult<U, E>>;
 };
