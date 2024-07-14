@@ -7,6 +7,14 @@ interface IResultOps<T, E> {
   andThen: <U>(fn: (value: T) => U) => IResult<U, E>;
 }
 
+/**
+ * Result type inspired by Rust
+ * @param T Type of the value
+ * @param E Type of the error
+ * @returns A tuple with the value, the error and a boolean indicating if it's an error
+ * @example
+ * const value = someResultFunction(1).orDefault(2).andThen((value) => value + 1);
+ */
 export type IResult<T, E> = (
   | IResultData<T, undefined, false>
   | IResultData<undefined, E, true>
@@ -72,16 +80,43 @@ function createResult<T, E>(value: T, error: E): IResult<T, E> {
   }
 }
 
+/**
+ * Creates a successful result
+ * @param value Value to be wrapped
+ * @returns A successful result
+ * @example
+ * const [value, reason, isError] = success(1);
+ */
 export function success<T, E = unknown>(value: T): IResultSuccess<T, E> {
   return createResult<T, E>(value, undefined) as IResultSuccess<T, E>;
 }
 
+/**
+ * Creates an error result
+ * @param error Error to be wrapped
+ * @returns An error result
+ * @example
+ * const [value, reason, isError] = error("error");
+ */
 export function error<E, T = unknown>(error: E): IResultError<E, T> {
   return createResult<T, E>(undefined, error) as IResultError<E, T>;
 }
 
 declare global {
   interface Promise<T> {
+    /**
+     * Converts a promise into a result
+     * @returns A promise that resolves to a result
+     * @example
+     * const [value, reason, isError] = await fetch("https://example.com").asResult();
+     *
+     * if (isError) {
+     *  console.error(reason);
+     *  return;
+     * }
+     *
+     * console.log(value);
+     */
     asResult<U = T, E = Error>(): Promise<IResult<U, E>>;
   }
 }
