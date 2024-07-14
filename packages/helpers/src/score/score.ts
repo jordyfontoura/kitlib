@@ -26,7 +26,7 @@ export type ScoreCondition = boolean | number | ScoreCondition[];
  * console.log(calculateScore([[true, true], true])) // 1
  * console.log(calculateScore([[true, false], [true, false, false, true], true, true])) // 0.6
  */
-export function calculateScore(conditions: ScoreCondition[]): number {
+export function calculateScore(conditions: ScoreCondition[], groupsOr = true): number {
   const maxScore = (1 << conditions.length) - 1;
   let score = 0;
 
@@ -39,7 +39,7 @@ export function calculateScore(conditions: ScoreCondition[]): number {
       score += (conditions[i] as number) * (1 << (conditions.length - i - 1));
     } else {
       const contitionsGroup = conditions[i] as ScoreCondition[];
-      let delta = calculateGroupScore(contitionsGroup);
+      let delta = (groupsOr ? calculateGroupScore : calculateScore)(contitionsGroup);
 
       if (delta === 0) {
         continue;

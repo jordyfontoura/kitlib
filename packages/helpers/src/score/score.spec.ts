@@ -21,6 +21,9 @@ describe('score', () => {
     expect(calculateScore([[false, true], true])).toBe(2/3)
     expect(calculateScore([[false, false], true])).toBe(1/3)
     expect(calculateScore([[true, false], [true, false, false, true], true, true])).toBe(0.6)
+
+    expect(calculateScore([[true, false], true], false)).toBeGreaterThan(calculateScore([[false, true], true], false))
+
   });
 
   it('should calculate the score of a all set of conditions', () => {
