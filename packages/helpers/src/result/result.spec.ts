@@ -56,7 +56,7 @@ describe('Result', () => {
 
   it('should map the value', () => {
     const result = success(1);
-    const mapped = result.then((value) => value + 1);
+    const mapped = result.mapValue((value) => value + 1);
 
     expect(mapped[0]).toBe(2);
     expect(mapped[1]).toBeUndefined();
@@ -65,7 +65,7 @@ describe('Result', () => {
 
   it('should map the error', () => {
     const result = error<string, number>('error');
-    const mapped = result.then((value) => value + 1);
+    const mapped = result.mapValue((value) => value + 1);
 
     expect(mapped[0]).toBeUndefined();
     expect(mapped[1]).toBe('error');
@@ -98,7 +98,7 @@ describe('Result', () => {
 
     const [value, reason, isError] = await fn(2).asResult();
 
-    expect(value).toBe(17);
+    expect(value).toBe(8.5);
     expect(reason).toBeUndefined();
     expect(isError).toBeFalsy();
   });

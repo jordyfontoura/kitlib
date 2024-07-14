@@ -5,7 +5,7 @@ interface IResultOps<T, E> {
   orDefault: (defaultValue: T) => T;
   orElse: <U = T>(fn: (error: E) => U) => T | U;
   orThrow: (message?: string) => T;
-  then: <U>(fn: (value: T) => U) => IResult<U, E>;
+  mapValue: <U>(fn: (value: T) => U) => IResult<U, E>;
 }
 export type IResult<T, E> = (IResultData<T, undefined, false> | IResultData<undefined, E, true>) & IResultOps<T, E>;
 
@@ -21,7 +21,7 @@ function createResult<T, E>(value: T, error: E): IResult<T, E> {
     orDefault,
     orElse,
     orThrow,
-    then,
+    mapValue,
   }
   if (error) {
     result = Object.assign([undefined, error, true], ops) as IResult<T, E>;
@@ -55,7 +55,7 @@ function createResult<T, E>(value: T, error: E): IResult<T, E> {
     return value;
   }
 
-  function then<U>(fn: (value: T) => U): IResultSuccess<U, E> | IResultError<E, U> {
+  function mapValue<U>(fn: (value: T) => U): IResultSuccess<U, E> | IResultError<E, U> {
     if (error !== undefined) {
       return result as unknown as IResultError<E, U>;
     }
