@@ -96,10 +96,22 @@ describe('Result', () => {
       return 17 / n;
     }
 
-    const [value, reason, isError] = await fn(2).asResult();
+    let [value, reason, isError] = await fn(2).asResult();
 
     expect(value).toBe(8.5);
     expect(reason).toBeUndefined();
     expect(isError).toBeFalsy();
+
+    [value, reason, isError] = await fn(0).asResult();
+
+    expect(value).toBeUndefined();
+    expect(reason).toBeDefined();
+    expect(isError).toBeTruthy();
+
+    value = (await fn(0).asResult()).orDefault(0);
+
+    expect(value).toBe(0);
+    expect(reason).toBeDefined();
+    expect(isError).toBeTruthy();
   });
 });
