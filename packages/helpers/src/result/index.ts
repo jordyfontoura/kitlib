@@ -8,7 +8,7 @@ interface IResultOps<T, E> {
 }
 
 /**
- * Result type inspired by Rust
+ * Result type that contains a value, an error and a boolean indicating if it's an error
  * @param T Type of the value
  * @param E Type of the error
  * @returns A tuple with the value, the error and a boolean indicating if it's an error
@@ -100,6 +100,53 @@ export function success<T, E = unknown>(value: T): IResultSuccess<T, E> {
  */
 export function error<E, T = unknown>(error: E): IResultError<E, T> {
   return createResult<T, E>(undefined, error) as IResultError<E, T>;
+}
+
+/**
+ * Converts an async function into a result async function
+ * @param fn Async function to be converted
+ * @returns A function that returns a promise that resolves to a result
+ * @example
+ * const fn = resultifyAsyncFunction(async (x) => x + 1);
+ * const [value, reason, isError] = await fn(1);
+ */
+export function resultifyAsyncFunction<T, E = Error, Fn extends (...args: any) => any = () => void>(
+  fn: Fn,
+): (...args: Parameters<Fn>) => Promise<IResult<T, E>> {
+  return (...args) => fn(...args).then(success, error) as Promise<IResult<T, E>>;
+}
+
+/**
+ * Converts a function into a result function
+ * @param fn Function to be converted
+ * @returns A function that returns a result
+ * @example
+ * const fn = resultifyFunction((x) => x + 1);
+ * const [value, reason, isError] = fn(1);
+ */
+export function resultifyFunction<T, E = Error, Fn extends (...args: any) => any = () => void>(
+  fn: Fn,
+): (...args: Parameters<Fn>) => IResult<T, E> {
+  return (...args) => {
+    try {
+      return success(fn(...args));
+    } catch (err) {
+      return error(err);
+    }
+  };
+}
+
+/**
+ * Converts a promise into a result promise
+ * @param promise Promise to be converted
+ * @returns A promise that resolves to a result
+ * @example
+ * const [value, reason, isError] = await resultifyPromise(fetch("https://example.com"));
+ */
+export function resultifyPromise<T, E = Error>(
+  promise: Promise<T>,
+): Promise<IResult<T, E>> {
+  return promise.then(success, error) as Promise<IResult<T, E>>;
 }
 
 declare global {
